@@ -1,4 +1,4 @@
-package com.sem.receivedata.presrntation
+package com.sem.receivedata.presentation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

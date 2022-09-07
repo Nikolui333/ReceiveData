@@ -1,4 +1,4 @@
-package com.sem.receivedata.presrntation
+package com.sem.receivedata.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

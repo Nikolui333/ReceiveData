@@ -1,4 +1,4 @@
-package com.sem.receivedata.presrntation.viewModel
+package com.sem.receivedata.presentation.viewModel
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

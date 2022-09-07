@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presrntation.MainActivity">
+    tools:context=".presentation.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
 
     <fragment
         android:id="@+id/cat_fragment"
-        android:name="com.sem.receivedata.presrntation.NameListFragment"
+        android:name="com.sem.receivedata.presentation.NameListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
