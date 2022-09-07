@@ -22,7 +22,8 @@ class DataSourceIMPL (private val dao: NameListDao):
     }
 
     override suspend fun clear() {
-        TODO("Not yet implemented")
+        CoroutineScope(Dispatchers.IO).launch {
+            dao.clear()}
     }
 
 

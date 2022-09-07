@@ -1,6 +1,7 @@
 package com.sem.receivedata.data.dataSourceIMPL
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import com.sem.receivedata.data.api.ApiClient
 import com.sem.receivedata.data.dataSource.ApiDataSource
@@ -27,6 +28,8 @@ class ApiDataSourceIMPL (private val dataSource: RDDataSource):
             response: Response<ArrayList<Data>>
            // /*<ArrayList*/<Pagination>/*>*/
         ) {
+
+            Log.d("ApiDataSource", "onResponse status: ${response.code()}")
 
             var loadNameList: ArrayList<Data>? = null
                     // /*ArrayList<*/Pagination/*>*/? = null
@@ -66,7 +69,7 @@ class ApiDataSourceIMPL (private val dataSource: RDDataSource):
                                , t: Throwable) {
             t.printStackTrace()
             Toast.makeText(context, "ОШИБКА! ВКЛЮЧИТЕ ИНТЕРНЕТ!", Toast.LENGTH_SHORT).show()
-
+            Log.e("ApiDataSource2", "onFailure", t)
         }
     })
 
