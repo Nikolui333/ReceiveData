@@ -1,13 +1,15 @@
 package com.sem.receivedata.presentation.adapters
 
 import android.content.Context
-import android.content.Intent
+import android.media.ImageWriter.newInstance
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sem.receivedata.R
 import com.sem.receivedata.data.models.PaginationLocalModel
@@ -15,8 +17,7 @@ import com.sem.receivedata.databinding.NameListItemBinding
 import com.sem.receivedata.presentation.DescriptionFragment
 import com.sem.receivedata.presentation.NameListFragment
 
-
-class NameListAdapter(var context: NameListFragment, var listener: NameListAdapterListener
+class NameListAdapter(var context: NameListFragment/*, var listener: NameListAdapterListener*/
 ) : RecyclerView.Adapter<NameListAdapter.NameListHolder>() {
 
     private val pagination = ArrayList<PaginationLocalModel>()
@@ -29,7 +30,7 @@ class NameListAdapter(var context: NameListFragment, var listener: NameListAdapt
     }
 
     override fun onBindViewHolder(holder: NameListHolder, position: Int) {
-        holder.bind(pagination[position], position, listener)
+        holder.bind(pagination[position], position, context)
     }
 
     override fun getItemCount(): Int {
@@ -43,28 +44,30 @@ class NameListAdapter(var context: NameListFragment, var listener: NameListAdapt
 
     class NameListHolder(val binding: NameListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(paginationLocalModel: PaginationLocalModel, position: Int, listener: NameListAdapterListener){
+        fun bind(paginationLocalModel: PaginationLocalModel, position: Int,/* listener: NameListAdapterListener,*/ context: NameListFragment){
 
             binding.name.text = paginationLocalModel.name
             itemView.setOnClickListener{
 
+              //  listener.itemClick(position, fragment)
+
                 val fragment = DescriptionFragment()
-                    // DialogFragment()
                 val bundle = Bundle()
                 bundle.putInt("someValue", 5)
                 fragment.setArguments(bundle)
 
-                listener.itemClick(position, fragment)
-               // val intent = Intent(NameListFragment(), fragment)
+                val activity=it.context as AppCompatActivity
+                activity.supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.rd_fragment, fragment)
+                    .commitNow()
 
-/*                val transaction = requireActivity().supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.fl_main, SecondFragment())
-                transaction.disallowAddToBackStack()
-                transaction.commit()*/
                 Log.d("OnClick", "произошло нажатие по позиции $position")
             }
 
         }
+
+
 
     }
 

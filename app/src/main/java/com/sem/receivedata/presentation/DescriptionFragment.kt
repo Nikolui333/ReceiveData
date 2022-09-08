@@ -5,22 +5,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModel
 import com.sem.receivedata.R
-
+import com.sem.receivedata.databinding.FragmentNameListBinding
+import com.sem.receivedata.presentation.viewModel.DescriptionViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DescriptionFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private var binding : FragmentNameListBinding? = null
+    private val descriptionViewModel : DescriptionViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_description, container, false)
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_name_list, container, false)
+
+      //  binding.name.text
+        return binding?.root
     }
 
 }
