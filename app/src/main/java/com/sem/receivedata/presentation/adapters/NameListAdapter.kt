@@ -1,10 +1,8 @@
+
 package com.sem.receivedata.presentation.adapters
 
-import android.content.Context
-import android.media.ImageWriter.newInstance
-
 import android.os.Bundle
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -16,8 +14,9 @@ import com.sem.receivedata.data.models.PaginationLocalModel
 import com.sem.receivedata.databinding.NameListItemBinding
 import com.sem.receivedata.presentation.DescriptionFragment
 import com.sem.receivedata.presentation.NameListFragment
+import android.util.Log
 
-class NameListAdapter(var context: NameListFragment/*, var listener: NameListAdapterListener*/
+class NameListAdapter(var context: NameListFragment
 ) : RecyclerView.Adapter<NameListAdapter.NameListHolder>() {
 
     private val pagination = ArrayList<PaginationLocalModel>()
@@ -44,30 +43,26 @@ class NameListAdapter(var context: NameListFragment/*, var listener: NameListAda
 
     class NameListHolder(val binding: NameListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(paginationLocalModel: PaginationLocalModel, position: Int,/* listener: NameListAdapterListener,*/ context: NameListFragment){
+        fun bind(paginationLocalModel: PaginationLocalModel, position: Int, context: NameListFragment){
 
             binding.name.text = paginationLocalModel.name
             itemView.setOnClickListener{
 
-              //  listener.itemClick(position, fragment)
-
                 val fragment = DescriptionFragment()
                 val bundle = Bundle()
-                bundle.putInt("someValue", 5)
+                bundle.putInt("position", position)
                 fragment.setArguments(bundle)
 
-                val activity=it.context as AppCompatActivity
+                val activity=context.context as AppCompatActivity
                 activity.supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.rd_fragment, fragment)
+                    .replace(R.id.framelayout, fragment)
                     .commitNow()
 
                 Log.d("OnClick", "произошло нажатие по позиции $position")
             }
 
         }
-
-
 
     }
 
