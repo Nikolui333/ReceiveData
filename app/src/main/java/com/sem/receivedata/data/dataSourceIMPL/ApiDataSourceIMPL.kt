@@ -8,6 +8,7 @@ import com.sem.receivedata.data.dataSource.ApiDataSource
 import com.sem.receivedata.data.dataSource.RDDataSource
 import com.sem.receivedata.data.models.Data
 import com.sem.receivedata.data.models.Pagination
+import com.sem.receivedata.data.models.PaginationApiModel
 import com.sem.receivedata.data.models.PaginationLocalModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,27 +20,22 @@ class ApiDataSourceIMPL (private val dataSource: RDDataSource):
     override fun startMigration (context: Context) {
 
     val call = ApiClient.instance?.api?.loadApi()
-    call?.enqueue(object: Callback <ArrayList<Data>>
-   // /*<ArrayList*/<Pagination>/*>*/
+    call?.enqueue(object: Callback <PaginationApiModel>
      {
         override fun onResponse(
-            call: Call<ArrayList<Data>>,
-            //</*ArrayList<*/Pagination>/*>*/,
-            response: Response<ArrayList<Data>>
-           // /*<ArrayList*/<Pagination>/*>*/
+            call: Call<PaginationApiModel>,
+            response: Response<PaginationApiModel>
         ) {
 
             Log.d("ApiDataSource", "onResponse status: ${response.code()}")
 
             var loadNameList: ArrayList<Data>? = null
-                    // /*ArrayList<*/Pagination/*>*/? = null
 
            // loadNameList?.clear()
 
-            loadNameList = (response.body() as ArrayList<Data>?)!!
-                   // /*ArrayList<*/Pagination/*>*/?)!!
+            loadNameList = response.body()?.result?.data
 
-            for (audit in loadNameList) {
+            for (audit in loadNameList!!) {
 
                 audit.id?.let {
                     PaginationLocalModel(
@@ -49,9 +45,6 @@ class ApiDataSourceIMPL (private val dataSource: RDDataSource):
                         audit.date.toString(),
                         audit.description.toString(),
 
-                     /*   audit.image.toString(),
-                        //  audit.description.toString(),
-                        audit.price.toString()*/
                     )
                 }?.let {
                     dataSource.insert(
@@ -64,8 +57,7 @@ class ApiDataSourceIMPL (private val dataSource: RDDataSource):
             Toast.makeText(context, "ЗАГРУЗКА", Toast.LENGTH_SHORT).show()
         }
 
-        override fun onFailure(call: Call <ArrayList<Data>>
-   // /*<ArrayList*/<Pagination>/*>*/
+        override fun onFailure(call: Call <PaginationApiModel>
                                , t: Throwable) {
             t.printStackTrace()
             Toast.makeText(context, "ОШИБКА! ВКЛЮЧИТЕ ИНТЕРНЕТ!", Toast.LENGTH_SHORT).show()
