@@ -1,5 +1,6 @@
 package com.sem.receivedata.presentation.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -20,7 +21,7 @@ class NameListAdapter() : RecyclerView.Adapter<NameListAdapter.NameListHolder>()
     }
 
     override fun onBindViewHolder(holder: NameListHolder, position: Int) {
-        holder.bind(pagination[position])
+        holder.bind(pagination[position], position)
     }
 
     override fun getItemCount(): Int {
@@ -34,9 +35,12 @@ class NameListAdapter() : RecyclerView.Adapter<NameListAdapter.NameListHolder>()
 
     class NameListHolder(val binding: NameListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(paginationLocalModel: PaginationLocalModel){
+        fun bind(paginationLocalModel: PaginationLocalModel, position: Int){
 
             binding.name.text = paginationLocalModel.name
+            itemView.setOnClickListener{
+                Log.d("OnClick", "произошло нажатие по позиции $position")
+            }
 
         }
 
