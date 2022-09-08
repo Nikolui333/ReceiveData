@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
     <fragment
-        android:id="@+id/cat_fragment"
+        android:id="@+id/rd_fragment"
         android:name="com.sem.receivedata.presentation.NameListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
