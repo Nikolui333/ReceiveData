@@ -16,8 +16,7 @@ import com.sem.receivedata.presentation.DescriptionFragment
 import com.sem.receivedata.presentation.NameListFragment
 import android.util.Log
 
-class NameListAdapter(var context: NameListFragment, var listener: NameListAdapterListener
-) : RecyclerView.Adapter<NameListAdapter.NameListHolder>() {
+class NameListAdapter(var context: NameListFragment) : RecyclerView.Adapter<NameListAdapter.NameListHolder>() {
 
     private val pagination = ArrayList<PaginationLocalModel>()
 

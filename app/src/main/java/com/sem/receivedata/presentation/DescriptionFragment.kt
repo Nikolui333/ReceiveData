@@ -21,12 +21,12 @@ class DescriptionFragment : Fragment() {
     private var binding : FragmentDescriptionBinding? = null
     private val descriptionViewModel : DescriptionViewModel by viewModel()
 
-    val position: Int = getArguments()?.getInt("position", 0) ?: 0
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val position: Int = getArguments()?.getInt("position", 0) ?: 0
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_description, container, false)
 
