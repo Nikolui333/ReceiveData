@@ -17,7 +17,7 @@ import androidx.lifecycle.Observer
 import com.sem.receivedata.presentation.adapters.NameListAdapterListener
 import org.xmlpull.v1.XmlPullParserFactory.newInstance
 
-class NameListFragment : Fragment() {
+class NameListFragment : Fragment(), NameListAdapterListener {
 
     private var nameListAdapter : NameListAdapter? = null
     private val nameListViewModel: NameListViewModel by viewModel()
@@ -42,7 +42,7 @@ class NameListFragment : Fragment() {
 
         binding?.listNameRV?.layoutManager =
             LinearLayoutManager(context)
-        nameListAdapter = NameListAdapter(this)
+        nameListAdapter = NameListAdapter(this, this)
 
         binding?.listNameRV?.adapter = nameListAdapter
     }
@@ -55,5 +55,17 @@ class NameListFragment : Fragment() {
             nameListAdapter?.notifyDataSetChanged()
         })
     }
+
+    override fun itemClick(position : Int, fragment: Fragment) {
+        loadFragment(fragment)
+    }
+
+    private fun loadFragment(fragment: Fragment){
+        val transaction = activity?.supportFragmentManager?.beginTransaction()
+        transaction?.replace(R.id.rd_fragment, fragment)
+        transaction?.disallowAddToBackStack()
+        transaction?.commit()
+    }
+
 
 }

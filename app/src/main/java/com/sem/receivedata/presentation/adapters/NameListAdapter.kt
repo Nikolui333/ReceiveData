@@ -16,7 +16,7 @@ import com.sem.receivedata.presentation.DescriptionFragment
 import com.sem.receivedata.presentation.NameListFragment
 import android.util.Log
 
-class NameListAdapter(var context: NameListFragment
+class NameListAdapter(var context: NameListFragment, var listener: NameListAdapterListener
 ) : RecyclerView.Adapter<NameListAdapter.NameListHolder>() {
 
     private val pagination = ArrayList<PaginationLocalModel>()
@@ -29,7 +29,7 @@ class NameListAdapter(var context: NameListFragment
     }
 
     override fun onBindViewHolder(holder: NameListHolder, position: Int) {
-        holder.bind(pagination[position], position, context)
+        holder.bind(pagination[position], position, listener /*context*/)
     }
 
     override fun getItemCount(): Int {
@@ -43,12 +43,20 @@ class NameListAdapter(var context: NameListFragment
 
     class NameListHolder(val binding: NameListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(paginationLocalModel: PaginationLocalModel, position: Int, context: NameListFragment){
+        fun bind(paginationLocalModel: PaginationLocalModel, position: Int, /*context: NameListFragment, */listener: NameListAdapterListener){
 
             binding.name.text = paginationLocalModel.name
             itemView.setOnClickListener{
 
                 val fragment = DescriptionFragment()
+                // DialogFragment()
+                val bundle = Bundle()
+                bundle.putInt("position", 5)
+                fragment.setArguments(bundle)
+
+                listener.itemClick(position, fragment)
+
+/*                val fragment = DescriptionFragment()
                 val bundle = Bundle()
                 bundle.putInt("position", position)
                 fragment.setArguments(bundle)
@@ -57,7 +65,7 @@ class NameListAdapter(var context: NameListFragment
                 activity.supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.framelayout, fragment)
-                    .commitNow()
+                    .commitNow()*/
 
                 Log.d("OnClick", "произошло нажатие по позиции $position")
             }
