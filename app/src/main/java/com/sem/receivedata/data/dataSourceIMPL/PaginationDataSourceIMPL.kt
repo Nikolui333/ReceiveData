@@ -8,7 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class DataSourceIMPL (private val dao: PaginationDao):
+class PaginationDataSourceIMPL (private val dao: PaginationDao):
     PaginationDataSource {
 
     override fun insert(paginationLocalModel: PaginationLocalModel) {

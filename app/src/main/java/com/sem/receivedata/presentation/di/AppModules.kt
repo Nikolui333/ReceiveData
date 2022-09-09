@@ -4,7 +4,7 @@ import androidx.room.Room
 import com.sem.receivedata.data.dataSource.ApiDataSource
 import com.sem.receivedata.data.dataSource.PaginationDataSource
 import com.sem.receivedata.data.dataSourceIMPL.ApiDataSourceIMPL
-import com.sem.receivedata.data.dataSourceIMPL.DataSourceIMPL
+import com.sem.receivedata.data.dataSourceIMPL.PaginationDataSourceIMPL
 import com.sem.receivedata.data.localDB.PaginationDB
 import com.sem.receivedata.data.repository.DescriptionRepository
 import com.sem.receivedata.data.repository.NameListRepository
@@ -30,7 +30,7 @@ val nameList = module {
     single { get<PaginationDB>().paginationDao }
 
     single<PaginationDataSource> {
-        DataSourceIMPL(
+        PaginationDataSourceIMPL(
             get()
         )
     }
@@ -64,7 +64,7 @@ val description = module {
     single { get<PaginationDB>().paginationDao }
 
     single<PaginationDataSource> {
-        DataSourceIMPL(
+        PaginationDataSourceIMPL(
             get()
         )
     }

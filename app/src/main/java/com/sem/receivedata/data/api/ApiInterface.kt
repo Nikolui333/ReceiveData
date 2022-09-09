@@ -8,6 +8,5 @@ interface ApiInterface {
 
     @GET("books?page=1")
     fun loadApi(): Call<PaginationApiModel>
-   // Pagination>
 
 }

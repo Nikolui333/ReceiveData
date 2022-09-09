@@ -1,6 +1,5 @@
 package com.sem.receivedata.domain.useCase
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.sem.receivedata.data.models.PaginationLocalModel
 import com.sem.receivedata.domain.repository.DescriptionCall

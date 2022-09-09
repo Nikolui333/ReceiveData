@@ -2,7 +2,6 @@ package com.sem.receivedata.presentation
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,8 +28,6 @@ class DescriptionFragment : Fragment() {
         val position: Int = getArguments()?.getInt("position", 0) ?: 0
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_description, container, false)
-
-        Log.d("OnClick", "position $position")
 
         descriptionViewModel?.loadDescription?.observe(viewLifecycleOwner, Observer {
 

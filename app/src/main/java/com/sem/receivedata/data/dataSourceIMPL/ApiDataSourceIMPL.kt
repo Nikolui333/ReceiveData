@@ -30,7 +30,7 @@ class ApiDataSourceIMPL (private val dataSource: PaginationDataSource):
 
             var loadNameList: ArrayList<DataApiModel>? = null
 
-           // loadNameList?.clear()
+            loadNameList?.clear()
 
             loadNameList = response.body()?.result?.data
 
