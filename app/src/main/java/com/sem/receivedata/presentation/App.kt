@@ -1,6 +1,7 @@
 package com.sem.receivedata.presentation
 
 import android.app.Application
+import com.sem.receivedata.presentation.di.description
 import com.sem.receivedata.presentation.di.nameList
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -18,7 +19,7 @@ class App : Application() {
 
             androidContext(this@App)
 
-            modules(nameList)
+            modules(nameList, description)
 
         }
 

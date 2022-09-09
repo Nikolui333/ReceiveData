@@ -6,9 +6,13 @@ import com.sem.receivedata.data.dataSource.RDDataSource
 import com.sem.receivedata.data.dataSourceIMPL.ApiDataSourceIMPL
 import com.sem.receivedata.data.dataSourceIMPL.DataSourceIMPL
 import com.sem.receivedata.data.localDB.ReceiveDataDB
+import com.sem.receivedata.data.repository.DescriptionRepository
 import com.sem.receivedata.data.repository.NameListRepository
+import com.sem.receivedata.domain.repository.DescriptionCall
 import com.sem.receivedata.domain.repository.NameListCall
+import com.sem.receivedata.domain.useCase.DescriptionUseCase
 import com.sem.receivedata.domain.useCase.NameListUseCase
+import com.sem.receivedata.presentation.viewModel.DescriptionViewModel
 import com.sem.receivedata.presentation.viewModel.NameListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -45,5 +49,38 @@ val nameList = module {
 
 
     viewModel { NameListViewModel(get()) }
+
+}
+
+val description = module {
+
+    single {
+        Room.databaseBuilder(
+            androidContext(), ReceiveDataDB::class.java,
+            "dbO"
+        ).build()
+    }
+
+    single { get<ReceiveDataDB>().nameListDao }
+
+    single<RDDataSource> {
+        DataSourceIMPL(
+            get()
+        )
+    }
+
+    single<ApiDataSource> {
+        ApiDataSourceIMPL(
+            get()
+        )
+    }
+
+    single<DescriptionCall> { DescriptionRepository(get()) }
+
+
+    single { DescriptionUseCase(get()) }
+
+
+    viewModel { DescriptionViewModel(get()) }
 
 }
