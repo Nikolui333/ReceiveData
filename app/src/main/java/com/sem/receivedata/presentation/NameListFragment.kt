@@ -1,6 +1,7 @@
 package com.sem.receivedata.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -32,13 +33,22 @@ class NameListFragment : Fragment(), NameListAdapterListener {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_name_list, container, false)
 
-        initRecyclerExchangeRate()
-        loadExchangeRate()
+        Log.d("OnClick", "name в первом фрагменте " + nameListViewModel.loadNameList.value?.get(0)?.name)
+
+        initRecyclerNameList()
+        loadNameList()
+
+        nameListViewModel?.loadNameList?.observe(viewLifecycleOwner, Observer {
+
+
+            nameListAdapter?.setList(it)
+            nameListAdapter?.notifyDataSetChanged()
+        })
 
         return binding?.root
     }
 
-    private fun initRecyclerExchangeRate(){
+    private fun initRecyclerNameList(){
 
         binding?.listNameRV?.layoutManager =
             LinearLayoutManager(context)
@@ -47,7 +57,17 @@ class NameListFragment : Fragment(), NameListAdapterListener {
         binding?.listNameRV?.adapter = nameListAdapter
     }
 
-    private fun loadExchangeRate(){
+/*    private fun temp() {
+
+        nameListViewModel?.loadNameList?.observe(viewLifecycleOwner, Observer {
+
+            nameListAdapter?.setList(it)
+            nameListAdapter?.notifyDataSetChanged()
+        })
+
+    }*/
+
+    private fun loadNameList(){
 
         nameListViewModel?.loadNameList?.observe(viewLifecycleOwner, Observer {
 

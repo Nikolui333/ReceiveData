@@ -64,8 +64,10 @@ class NameListAdapter(var context: NameListFragment, var listener: NameListAdapt
                 val activity=context.context as AppCompatActivity
                 activity.supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.framelayout, fragment)
-                    .commitNow()
+                    .replace(R.id.framelayout, fragment).
+                    addToBackStack(null)
+                    .commit()
+                   // .commitNow()
 
                 Log.d("OnClick", "произошло нажатие по позиции $position")
             }

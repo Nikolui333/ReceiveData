@@ -2,9 +2,11 @@ package com.sem.receivedata.presentation.di
 
 import androidx.room.Room
 import com.sem.receivedata.data.dataSource.ApiDataSource
+import com.sem.receivedata.data.dataSource.DescriptionDataSource
 import com.sem.receivedata.data.dataSource.RDDataSource
 import com.sem.receivedata.data.dataSourceIMPL.ApiDataSourceIMPL
 import com.sem.receivedata.data.dataSourceIMPL.DataSourceIMPL
+import com.sem.receivedata.data.dataSourceIMPL.DescriptionDataSourceIMPL
 import com.sem.receivedata.data.localDB.ReceiveDataDB
 import com.sem.receivedata.data.repository.DescriptionRepository
 import com.sem.receivedata.data.repository.NameListRepository
@@ -63,14 +65,8 @@ val description = module {
 
     single { get<ReceiveDataDB>().nameListDao }
 
-    single<RDDataSource> {
-        DataSourceIMPL(
-            get()
-        )
-    }
-
-    single<ApiDataSource> {
-        ApiDataSourceIMPL(
+    single<DescriptionDataSource> {
+        DescriptionDataSourceIMPL(
             get()
         )
     }
