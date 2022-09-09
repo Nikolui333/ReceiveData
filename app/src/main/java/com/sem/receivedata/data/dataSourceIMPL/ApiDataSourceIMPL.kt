@@ -5,16 +5,15 @@ import android.util.Log
 import android.widget.Toast
 import com.sem.receivedata.data.api.ApiClient
 import com.sem.receivedata.data.dataSource.ApiDataSource
-import com.sem.receivedata.data.dataSource.RDDataSource
-import com.sem.receivedata.data.models.Data
-import com.sem.receivedata.data.models.Pagination
+import com.sem.receivedata.data.dataSource.PaginationDataSource
+import com.sem.receivedata.data.models.DataApiModel
 import com.sem.receivedata.data.models.PaginationApiModel
 import com.sem.receivedata.data.models.PaginationLocalModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ApiDataSourceIMPL (private val dataSource: RDDataSource):
+class ApiDataSourceIMPL (private val dataSource: PaginationDataSource):
     ApiDataSource {
 
     override fun startMigration (context: Context) {
@@ -29,7 +28,7 @@ class ApiDataSourceIMPL (private val dataSource: RDDataSource):
 
             Log.d("ApiDataSource", "onResponse status: ${response.code()}")
 
-            var loadNameList: ArrayList<Data>? = null
+            var loadNameList: ArrayList<DataApiModel>? = null
 
            // loadNameList?.clear()
 

@@ -3,11 +3,11 @@ package com.sem.receivedata.data.dataSource
 import androidx.lifecycle.LiveData
 import com.sem.receivedata.data.models.PaginationLocalModel
 
-interface RDDataSource {
+interface PaginationDataSource {
 
     fun insert(paginationLocalModel: PaginationLocalModel)
 
-    fun loadNameList(): LiveData<List<PaginationLocalModel>>
+    fun loadPagination(): LiveData<List<PaginationLocalModel>>
 
     suspend fun clear()
 

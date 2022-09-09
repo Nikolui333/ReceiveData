@@ -9,7 +9,6 @@ class DescriptionUseCase(private val descriptionCall: DescriptionCall) {
 
     fun loadDescription(): LiveData<List<PaginationLocalModel>> {
 
-        Log.d("OnClick", "DescriptionUseCase " + descriptionCall.loadDescription())
         return descriptionCall.loadDescription()
 
     }

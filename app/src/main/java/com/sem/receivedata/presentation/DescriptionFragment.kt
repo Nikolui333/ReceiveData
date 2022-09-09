@@ -30,10 +30,7 @@ class DescriptionFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_description, container, false)
 
-        binding?.name?.text = descriptionViewModel.loadDescription.value?.get(position)?.name
-        Log.d("OnClick", "name во втором фрагменте " + descriptionViewModel.loadDescription.value?.get(position)?.name)
-        binding?.date?.text = descriptionViewModel.loadDescription.value?.get(position)?.date
-        binding?.description?.text = descriptionViewModel.loadDescription.value?.get(position)?.description
+        Log.d("OnClick", "position $position")
 
         descriptionViewModel?.loadDescription?.observe(viewLifecycleOwner, Observer {
 
@@ -46,6 +43,7 @@ class DescriptionFragment : Fragment() {
         return binding?.root
     }
 
+    // возвращение обратно в NameListFragment
     override fun onAttach(context: Context) {
         super.onAttach(context)
         val callback: OnBackPressedCallback =
@@ -55,7 +53,7 @@ class DescriptionFragment : Fragment() {
 
                     val fragment = NameListFragment()
 
-                    val activity=context/*context*/ as AppCompatActivity
+                    val activity=context as AppCompatActivity
                     activity.supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.framelayout, fragment).

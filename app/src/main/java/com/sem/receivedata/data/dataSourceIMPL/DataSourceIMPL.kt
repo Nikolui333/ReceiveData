@@ -1,24 +1,23 @@
 package com.sem.receivedata.data.dataSourceIMPL
 
 import androidx.lifecycle.LiveData
-import com.sem.receivedata.data.dataSource.RDDataSource
-import com.sem.receivedata.data.localDB.NameListDao
-import com.sem.receivedata.data.models.Pagination
+import com.sem.receivedata.data.dataSource.PaginationDataSource
+import com.sem.receivedata.data.localDB.PaginationDao
 import com.sem.receivedata.data.models.PaginationLocalModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class DataSourceIMPL (private val dao: NameListDao):
-    RDDataSource {
+class DataSourceIMPL (private val dao: PaginationDao):
+    PaginationDataSource {
 
     override fun insert(paginationLocalModel: PaginationLocalModel) {
         CoroutineScope(Dispatchers.IO).launch {
             dao.insert(paginationLocalModel)}
     }
 
-    override fun loadNameList(): LiveData<List<PaginationLocalModel>> {
-        return dao.loadNameList()
+    override fun loadPagination(): LiveData<List<PaginationLocalModel>> {
+        return dao.loadPagination()
     }
 
     override suspend fun clear() {

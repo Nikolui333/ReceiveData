@@ -29,11 +29,8 @@ class NameListFragment : Fragment(), NameListAdapterListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_name_list, container, false)
-
-        Log.d("OnClick", "name в первом фрагменте " + nameListViewModel.loadNameList.value?.get(0)?.name)
 
         initRecyclerNameList()
         loadNameList()
@@ -70,6 +67,5 @@ class NameListFragment : Fragment(), NameListAdapterListener {
         transaction?.disallowAddToBackStack()
         transaction?.commit()
     }
-
 
 }

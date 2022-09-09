@@ -29,7 +29,7 @@ class NameListAdapter(var context: NameListFragment, var listener: NameListAdapt
     }
 
     override fun onBindViewHolder(holder: NameListHolder, position: Int) {
-        holder.bind(pagination[position], position, /*listener*/ context)
+        holder.bind(pagination[position], position, context)
     }
 
     override fun getItemCount(): Int {
@@ -43,18 +43,10 @@ class NameListAdapter(var context: NameListFragment, var listener: NameListAdapt
 
     class NameListHolder(val binding: NameListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(paginationLocalModel: PaginationLocalModel, position: Int, context: NameListFragment/*, listener: NameListAdapterListener*/){
+        fun bind(paginationLocalModel: PaginationLocalModel, position: Int, context: NameListFragment){
 
             binding.name.text = paginationLocalModel.name
             itemView.setOnClickListener{
-
-/*                val fragment = DescriptionFragment()
-                // DialogFragment()
-                val bundle = Bundle()
-                bundle.putInt("position", 5)
-                fragment.setArguments(bundle)
-
-                listener.itemClick(position, fragment)*/
 
                 val fragment = DescriptionFragment()
                 val bundle = Bundle()
@@ -64,10 +56,8 @@ class NameListAdapter(var context: NameListFragment, var listener: NameListAdapt
                 val activity=context.context as AppCompatActivity
                 activity.supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.framelayout, fragment).
-                    addToBackStack(null)
-                    .commit()
-                   // .commitNow()
+                    .replace(R.id.framelayout, fragment)
+                    .commitNow()
 
                 Log.d("OnClick", "произошло нажатие по позиции $position")
             }
