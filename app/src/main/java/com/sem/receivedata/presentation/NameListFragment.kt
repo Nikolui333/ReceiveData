@@ -38,13 +38,6 @@ class NameListFragment : Fragment(), NameListAdapterListener {
         initRecyclerNameList()
         loadNameList()
 
-        nameListViewModel?.loadNameList?.observe(viewLifecycleOwner, Observer {
-
-
-            nameListAdapter?.setList(it)
-            nameListAdapter?.notifyDataSetChanged()
-        })
-
         return binding?.root
     }
 
@@ -57,15 +50,6 @@ class NameListFragment : Fragment(), NameListAdapterListener {
         binding?.listNameRV?.adapter = nameListAdapter
     }
 
-/*    private fun temp() {
-
-        nameListViewModel?.loadNameList?.observe(viewLifecycleOwner, Observer {
-
-            nameListAdapter?.setList(it)
-            nameListAdapter?.notifyDataSetChanged()
-        })
-
-    }*/
 
     private fun loadNameList(){
 

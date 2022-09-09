@@ -1,20 +1,20 @@
 package com.sem.receivedata.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModel
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.sem.receivedata.R
 import com.sem.receivedata.databinding.FragmentDescriptionBinding
-import com.sem.receivedata.databinding.FragmentNameListBinding
 import com.sem.receivedata.presentation.viewModel.DescriptionViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import androidx.lifecycle.Observer
 
 class DescriptionFragment : Fragment() {
 
@@ -40,12 +40,33 @@ class DescriptionFragment : Fragment() {
             binding?.name?.text = it.get(position).name
             binding?.date?.text = it.get(position).date
             binding?.description?.text = it.get(position).description
-            
-            //nameListAdapter?.setList(it)
-          //  nameListAdapter?.notifyDataSetChanged()
+
         })
 
         return binding?.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true)
+            {
+                override fun handleOnBackPressed() {
+
+                    val fragment = NameListFragment()
+
+                    val activity=context/*context*/ as AppCompatActivity
+                    activity.supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.framelayout, fragment).
+                        addToBackStack(null)
+                        .commit()
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            callback
+        )
     }
 
 }
